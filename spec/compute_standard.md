@@ -33,8 +33,8 @@ The compute Shell version follows Semantic Versioning Guidelines (see details in
 
 ** Example **
 - Family: Compute Server, Model: Dell Power-Edge Server
- - Family: Port, Model: Generic NIC
- - Family: Power Port, Model: Generic Power Port
+- Family: Port, Model: Resource Port
+- Family: Power Port, Model: Generic Power Port
 
 
 #### Family Rules

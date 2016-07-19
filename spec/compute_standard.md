@@ -27,13 +27,13 @@ The compute Shell version follows Semantic Versioning Guidelines (see details in
 
 ** Compute Server Data Model **
 - Compute Server
- - NIC
+ - Port
  - Power Port
 
 
 ** Example **
 - Family: Compute Server, Model: Dell Power-Edge Server
- - Family: NIC, Model: Generic NIC
+ - Family: Port, Model: Generic NIC
  - Family: Power Port, Model: Generic Power Port
 
 
@@ -42,7 +42,7 @@ The compute Shell version follows Semantic Versioning Guidelines (see details in
 Family | Rules
 --- | ---
 Compute Server | Searchable
-NIC | Searchable, Connectable, Locked By Default
+Port | Searchable, Connectable, Locked By Default
 Power Port | Searchable, Connectable, Locked By Default
 
 

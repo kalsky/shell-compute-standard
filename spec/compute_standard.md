@@ -70,26 +70,32 @@ Note: The [ID] for each sub-resource is taken from the device itself (correspond
 
 Attribute Name | Details | User input?
 --- | --- | ---
+User | User with administrative privileges | Yes
+Password | Attribute of type Password | Yes
+Enable Password | Attribute of type Password, The Enable password is required by some CLI protocols such as Telnet | Yes
+Power Management | Attribute of type Boolean. Possible values – True, False, Used by the power management orchestration, if enabled, to determine whether to automatically manage the device power status | Yes
+System Name | A unique identifier for the device, if exists in the device terminal/os | No
 Vendor | | No
-Location | | No
-Model | | No
-OS Architecture | | No
-OS Type | | No
-OS Distribution | | No
-OS Version | | No
-Storage Capacity | | No
+Location | The device physical location identifier. For example: Lab1/Floor2/Row5/Slot4 | No
+Backup Location | Used by the save/restore orchestration to determine where backups should be saved | Yes
+Model | The device model. This information is typically used for abstract resource filtering. | No
 SNMP Read Community | | Yes
 SNMP Write Community | | Yes
 SNMP V3 User | | Yes
 SNMP V3 Password | | Yes
 SNMP V3 Private Key | | Yes
 SNMP Version | Possible values – v1, v2c, v3 | Yes
+Sessions Concurrency Limit | Attributes of type Numeric. Default is 1 (no concurrency) | Yes
 Console Server IP Address | | Yes
 Console User | | Yes
 Console Port | Attributes of type Numeric | Yes
 Console Password | Attribute of type Password | Yes
 CLI Connection Type | Attribute of type Lookup. Possible values – Auto, Console, SSH, Telnet, TCP | Yes
-Power Management | Attribute of type Boolean. Possible values – True, False | Yes
+OS Architecture | The Operating System (OS) architecture - i.e: x86_32, x86_64, etc. | No
+OS Type | The Operating System (OS) type - i.e: linux, aix, mac, windows, etc.  | No
+OS Distribution | The Operating System (OS) distribution. i.e: linux distributions: debian, fedora, rhel and ubuntu | No
+OS Version | The Operating System version | No
+Storage Capacity | The storage size in MB.  | No
 
 
 #####  Generic Power Port
@@ -134,6 +140,6 @@ Command outputs: On failure an exception containing the error will be thrown and
 
 
 
-  - ** Shutdown ** – sends a graceful shutdown to the device
+  - ** Restart ** – restarts the device
       - Inputs:
-        - Note that not all devices support a shutdown command. In such cases the command just wouldn’t be implemented
+        - Note that not all devices support this command. In such cases the command just wouldn’t be implemented

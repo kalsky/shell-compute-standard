@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<DataModelInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.qualisystems.com/ResourceManagement/DataModelSchema.xsd">
+<DataModelInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.qualisystems.com/ResourceManagement/DataModelSchema.xsd">
   <Attributes>
+	<AttributeInfo Name="OS Architecture" Type="String" DefaultValue="" IsReadOnly="false" Description="The Operating System (OS) architecture - i.e: x86_32, x86_64, etc.">
+      <Rules>
+		<Rule Name="Setting" />
+		<Rule Name="Available For Abstract Resources" />
+      </Rules>
+    </AttributeInfo>
+	<AttributeInfo Name="OS Type" Type="String" DefaultValue="" IsReadOnly="false" Description="The Operating System (OS) type - i.e: linux, aix, mac, windows, etc.">
+      <Rules>
+		<Rule Name="Setting" />
+		<Rule Name="Available For Abstract Resources" />
+      </Rules>
+    </AttributeInfo>
+	<AttributeInfo Name="OS Distribution" Type="String" DefaultValue="" IsReadOnly="false" Description="The Operating System (OS) distribution. i.e: linux distributions: debian, fedora, rhel and ubuntu">
+      <Rules>
+		<Rule Name="Setting" />
+		<Rule Name="Available For Abstract Resources" />
+	</Rules>
+    </AttributeInfo>
+	<AttributeInfo Name="OS Version" Type="String" DefaultValue="" IsReadOnly="false" Description="The Operating System version">
+      <Rules>
+		<Rule Name="Setting" />
+		<Rule Name="Available For Abstract Resources" />
+      </Rules>
+    </AttributeInfo>
+	<AttributeInfo Name="Storage Capacity" Type="String" DefaultValue="" IsReadOnly="false" Description="The storage size in MB.">
+      <Rules>
+		<Rule Name="Setting" />
+		<Rule Name="Available For Abstract Resources" />
+      </Rules>
+    </AttributeInfo>
     <AttributeInfo Name="User" Type="String" DefaultValue="" IsReadOnly="false">
       <Rules>
         <Rule Name="Configuration" />
@@ -11,32 +41,34 @@
         <Rule Name="Configuration" />
       </Rules>
     </AttributeInfo>
-    <AttributeInfo Name="Enable Password" Type="Password" DefaultValue="3M3u7nkDzxWb0aJ/IZYeWw==" IsReadOnly="false">
+    <AttributeInfo Name="Enable Password" Type="Password" DefaultValue="3M3u7nkDzxWb0aJ/IZYeWw==" IsReadOnly="false"
+       Description="The Enable password is required by some CLI protocols such as Telnet">
       <Rules>
         <Rule Name="Configuration" />
       </Rules>
     </AttributeInfo>
-    <AttributeInfo Name="Power Management" Type="Boolean" DefaultValue="False" IsReadOnly="false">
+    <AttributeInfo Name="Power Management" Type="Boolean" DefaultValue="False" IsReadOnly="false"
+       Description="Used by the power management orchestration, if enabled, to determine whether to automatically manage the device power status">
       <Rules>
         <Rule Name="Configuration" />
       </Rules>
     </AttributeInfo>
-    <AttributeInfo Name="System Name" Type="String" DefaultValue="" IsReadOnly="true">
+    <AttributeInfo Name="System Name" Type="String" DefaultValue="" IsReadOnly="true"
+      Description="A unique identifier for the device, if exists in the device terminal/os  ">
       <Rules Override="false">
 	     <Rule Name="Setting" />
-	     <Rule Name="Available For Abstract Resources" />
       </Rules>
     </AttributeInfo>
-    <AttributeInfo Name="Contact Name" Type="String" DefaultValue="" IsReadOnly="true">
+    <AttributeInfo Name="Port Description" Type="String" DefaultValue="" IsReadOnly="true">
       <Rules Override="false">
 	     <Rule Name="Setting" />
-	     <Rule Name="Available For Abstract Resources" />
       </Rules>
     </AttributeInfo>
-    <AttributeInfo Name="OS Version" Type="String" DefaultValue="" IsReadOnly="true">
+    <AttributeInfo Name="Port Speed" Type="String" DefaultValue="" IsReadOnly="true"
+      Description="The port speed (e.g 10Gb/s, 40Gb/s, 100Mb/s)">
       <Rules Override="false">
-	     <Rule Name="Setting" />
-	     <Rule Name="Available For Abstract Resources" />
+       <Rule Name="Setting" />
+       <Rule Name="Available For Abstract Resources" />
       </Rules>
     </AttributeInfo>
     <AttributeInfo Name="Version" Type="String" DefaultValue="" IsReadOnly="true">
@@ -48,33 +80,28 @@
     <AttributeInfo Name="Vendor" Type="String" DefaultValue="" IsReadOnly="true">
       <Rules Override="false">
 	     <Rule Name="Setting" />
+        <Rule Name="Displayed In Search Filter"/>
 	     <Rule Name="Available For Abstract Resources" />
       </Rules>
     </AttributeInfo>
-    <AttributeInfo Name="Location" Type="String" DefaultValue="" IsReadOnly="true">
+    <AttributeInfo Name="Location" Type="String" DefaultValue="" IsReadOnly="true"
+      Description="The device physical location identifier. For example: Lab1/Floor2/Row5/Slot4">
       <Rules Override="false">
 	     <Rule Name="Setting" />
 	     <Rule Name="Available For Abstract Resources" />
       </Rules>
     </AttributeInfo>
-    <AttributeInfo Name="Backup Location" Type="String" DefaultValue="" IsReadOnly="false">
+    <AttributeInfo Name="Backup Location" Type="String" DefaultValue="" IsReadOnly="false"
+      Description="Used by the save/restore orchestration to determine where backups should be saved">
       <Rules>
         <Rule Name="Configuration" />
       </Rules>
     </AttributeInfo>
-	<AttributeInfo xsi:type="LookupAttributeDetails" Name="Protocol Type" Type="Lookup" DefaultValue="Transparent" IsReadOnly="true" IsCommand="false">
-      <Rules Override="false">
-	     <Rule Name="Setting" />
-	     <Rule Name="Available For Abstract Resources" />
-       <Rule Name="Constant Capability" />
-      </Rules>
-            <LookupValues>
-                <LookupValue NumericValue="0" StringValue="Transparent"/>
-            </LookupValues>
-        </AttributeInfo>
-    <AttributeInfo Name="Model" Type="String" DefaultValue="" IsReadOnly="true">
+    <AttributeInfo Name="Model" Type="String" DefaultValue="" IsReadOnly="true"
+      Description="The device model. This information is typically used for abstract resource filtering.">
       <Rules Override="false">
       	<Rule Name="Setting" />
+        <Rule Name="Displayed In Search Filter"/>
 	       <Rule Name="Available For Abstract Resources" />
       </Rules>
     </AttributeInfo>
@@ -157,12 +184,6 @@
 	     <Rule Name="Available For Abstract Resources" />
       </Rules>
     </AttributeInfo>
-    <AttributeInfo Name="L2 Protocol Type" Type="String" DefaultValue="" IsReadOnly="true">
-      <Rules Override="false">
-       <Rule Name="Setting" />
-       <Rule Name="Available For Abstract Resources" />
-      </Rules>
-    </AttributeInfo>
     <AttributeInfo Name="IPv4 Address" Type="String" DefaultValue="" IsReadOnly="true">
       <Rules Override="false">
 	     <Rule Name="Setting" />
@@ -175,213 +196,54 @@
 	     <Rule Name="Available For Abstract Resources" />
       </Rules>
     </AttributeInfo>
-    <AttributeInfo Name="Port Description" Type="String" DefaultValue="" IsReadOnly="true">
-      <Rules Override="false">
-	     <Rule Name="Setting" />
-	     <Rule Name="Available For Abstract Resources" />
-      </Rules>
-    </AttributeInfo>
-    <AttributeInfo Name="Bandwidth" Type="Numeric" DefaultValue="0" IsReadOnly="true">
-      <Rules Override="false">
-	     <Rule Name="Setting" />
-	     <Rule Name="Available For Abstract Resources" />
-      </Rules>
-    </AttributeInfo>
-    <AttributeInfo Name="MTU" Type="Numeric" DefaultValue="0" IsReadOnly="true">
-      <Rules Override="false">
-      	<Rule Name="Setting" />
-	      <Rule Name="Available For Abstract Resources" />
-      </Rules>
-    </AttributeInfo>
-    <AttributeInfo xsi:type="LookupAttributeDetails" Name="Duplex" Type="Lookup" DefaultValue="Half" IsReadOnly="true">
-      <Rules Override="false">
-        <Rule Name="Setting" />
-        <Rule Name="Available For Abstract Resources" />
-      </Rules>
-      <LookupValues>
-        <LookupValue NumericValue="2" StringValue="Half" />
-        <LookupValue NumericValue="3" StringValue="Full" />
-      </LookupValues>
-    </AttributeInfo>
-    <AttributeInfo Name="Adjacent" Type="String" DefaultValue="" IsReadOnly="true">
-      <Rules Override="false">
-	     <Rule Name="Setting" />
-	     <Rule Name="Available For Abstract Resources" />
-      </Rules>
-    </AttributeInfo>
-    <AttributeInfo Name="Auto Negotiation" Type="Boolean" DefaultValue="False" IsReadOnly="true">
-      <Rules Override="false">
-	     <Rule Name="Setting" />
-	     <Rule Name="Available For Abstract Resources" />
-      </Rules>
-    </AttributeInfo>
-    <AttributeInfo Name="Associated Ports" Type="String" DefaultValue="" Description="in the format &quot;[portResourceName],...&quot;, for example &quot;GE0-0-0-1,GE-0-0-0-2&quot;" IsReadOnly="true">
-      <Rules Override="false">
-	     <Rule Name="Setting" />
-	     <Rule Name="Available For Abstract Resources" />
-      </Rules>
-    </AttributeInfo>
   </Attributes>
   <ResourceFamilies>
-    <ResourceFamily Name="Switch" Description="" IsSearchable="true" IsPowerSwitch="true">
-      <AttachedAttributes />
-      <AttributeValues />
+    <ResourceFamily Name="Compute Server" IsConnectable="false" IsLockedByDefault="true" Description="" IsSearchable="true" ResourceType="Resource">
+      <AttachedAttributes>
+      </AttachedAttributes>
+      <AttributeValues>
+      </AttributeValues>
       <Models>
-      </Models>
-      <Categories />
-    </ResourceFamily>
-    
-    <ResourceFamily Name="Chassis" Description="" IsSearchable="true">
-		<AttachedAttributes />
-		<AttributeValues />
-      <Models>
-        <ResourceModel Name="Generic Chassis" Description="" SupportsConcurrentCommands="false">
-		<AttachedAttributes>
-          <AttachedAttribute Name="Model" IsOverridable="true" IsLocal="true">
-            <AllowedValues />
-          </AttachedAttribute>
-          <AttachedAttribute Name="Serial Number" IsOverridable="true" IsLocal="true">
-            <AllowedValues />
-          </AttachedAttribute>
-        </AttachedAttributes>
-        <AttributeValues>
-          <AttributeValue Name="Model" Value="" />
-          <AttributeValue Name="Serial Number" Value="" />
-        </AttributeValues>
-			<ParentModels>
-				<ParentModelName>Cisco NXOS Switch</ParentModelName>
-			</ParentModels>
-			<Drivers />
-			<Scripts />
-        </ResourceModel>
-      </Models>
-      <Categories />
-    </ResourceFamily>
-    <ResourceFamily Name="Module" Description="" IsSearchable="true">
-		<AttachedAttributes />
-		<AttributeValues />
-      <Models>
-        <ResourceModel Name="Generic Module" Description="" SupportsConcurrentCommands="false">
-		<AttachedAttributes>
-          <AttachedAttribute Name="Serial Number" IsOverridable="true" IsLocal="true">
-            <AllowedValues />
-          </AttachedAttribute>
-          <AttachedAttribute Name="Version" IsOverridable="true" IsLocal="true">
-            <AllowedValues />
-          </AttachedAttribute>
-          <AttachedAttribute Name="Model" IsOverridable="true" IsLocal="true">
-            <AllowedValues />
-          </AttachedAttribute>
-        </AttachedAttributes>
-        <AttributeValues>
-          <AttributeValue Name="Serial Number" Value="" />
-	  <AttributeValue Name="Version" Value="" />
-          <AttributeValue Name="Model" Value="" />
-        </AttributeValues>
-			<ParentModels>
-				<ParentModelName>Generic Chassis</ParentModelName>
-			</ParentModels>
-			<Drivers />
-			<Scripts />
-        </ResourceModel>
       </Models>
       <Categories />
     </ResourceFamily>
     <ResourceFamily Name="Port" IsSearchable="true" IsConnectable="true" IsLockedByDefault="true">
-          	<AttachedAttributes />
-			<AttributeValues />
-		<Models>
-        <ResourceModel Name="Generic Port" Description="" SupportsConcurrentCommands="false">
-			<AttachedAttributes>
-			<AttachedAttribute Name="MAC Address" IsOverridable="true" IsLocal="true">
-			<AllowedValues />
-			</AttachedAttribute>
-			<AttachedAttribute Name="L2 Protocol Type" IsOverridable="true" IsLocal="true">
-			<AllowedValues />
-			</AttachedAttribute>
-			<AttachedAttribute Name="IPv4 Address" IsOverridable="true" IsLocal="true">
-			<AllowedValues />
-			</AttachedAttribute>
-			<AttachedAttribute Name="IPv6 Address" IsOverridable="true" IsLocal="true">
-			<AllowedValues />
-			</AttachedAttribute>
-			<AttachedAttribute Name="Port Description" IsOverridable="true" IsLocal="true">
-			<AllowedValues />
-			</AttachedAttribute>
-			<AttachedAttribute Name="Bandwidth" IsOverridable="true" IsLocal="true">
-			<AllowedValues />
-			</AttachedAttribute>
-			<AttachedAttribute Name="MTU" IsOverridable="true" IsLocal="true">
-			<AllowedValues />
-			</AttachedAttribute>
-			<AttachedAttribute Name="Duplex" IsOverridable="true" IsLocal="true">
-			<AllowedValues />
-			</AttachedAttribute>
-			<AttachedAttribute Name="Adjacent" IsOverridable="true" IsLocal="true">
-			<AllowedValues />
-			</AttachedAttribute>
-			<AttachedAttribute Name="Auto Negotiation" IsOverridable="true" IsLocal="true">
-			<AllowedValues />
-			</AttachedAttribute>
-			<AttachedAttribute Name="Protocol Type" IsOverridable="true" IsLocal="true">
-				<AllowedValues />
-			</AttachedAttribute>
-		</AttachedAttributes>
-		<AttributeValues>
-			<AttributeValue Name="MAC Address" Value="" />
-			<AttributeValue Name="L2 Protocol Type" Value="" />
-			<AttributeValue Name="IPv4 Address" Value="" />
-			<AttributeValue Name="IPv6 Address" Value="" />
-			<AttributeValue Name="Port Description" Value="" />
-			<AttributeValue Name="Bandwidth" Value="0" />
-			<AttributeValue Name="MTU" Value="0" />
-			<AttributeValue Name="Duplex" Value="Half" />
-			<AttributeValue Name="Protocol Type" Value="Transparent" />
-			<AttributeValue Name="Adjacent" Value="" />
-			<AttributeValue Name="Auto Negotiation" Value="False" />
-		</AttributeValues>
-			<ParentModels>
-				<ParentModelName>Generic Chassis</ParentModelName>
-				<ParentModelName>Generic Module</ParentModelName>
-				<ParentModelName>Generic Sub Module</ParentModelName>
-			</ParentModels>
-			<Drivers />
-			<Scripts />
-        </ResourceModel>
-      </Models>
-      <Categories />
-    </ResourceFamily>
-    <ResourceFamily Name="Sub Module" Description="" IsSearchable="true">
-		<AttachedAttributes />
-		<AttributeValues />
-	  <Models>
-        <ResourceModel Name="Generic Sub Module" Description="" SupportsConcurrentCommands="false">
-	<AttachedAttributes>
-            <AttachedAttribute Name="Serial Number" IsOverridable="true" IsLocal="true">
-              <AllowedValues />
-	    </AttachedAttribute>
-            <AttachedAttribute Name="Version" IsOverridable="true" IsLocal="true">
-              <AllowedValues />
-            </AttachedAttribute>
-            <AttachedAttribute Name="Model" IsOverridable="true" IsLocal="true">
-              <AllowedValues />
-            </AttachedAttribute>
-        </AttachedAttributes>
-        <AttributeValues>
-            <AttributeValue Name="Serial Number" Value="" />
-	    <AttributeValue Name="Version" Value="" />
-            <AttributeValue Name="Model" Value="" />
-        </AttributeValues>
-          <ParentModels>
-            <ParentModelName>Generic Module</ParentModelName>
-          </ParentModels>
-          <Drivers />
-          <Scripts />
-        </ResourceModel>
-      </Models>
-      <Categories />
-    </ResourceFamily>
-    <ResourceFamily Name="Power Port" IsConnectable="true" IsLockedByDefault="true" Description="" IsSearchable="true">
+      <AttachedAttributes />
+      <AttributeValues />
+      <Models>
+       <ResourceModel Name="Resource Port" Description="" SupportsConcurrentCommands="false">
+         <AttachedAttributes>
+           <AttachedAttribute Name="MAC Address" IsOverridable="true" IsLocal="true">
+             <AllowedValues />
+           </AttachedAttribute>
+           <AttachedAttribute Name="IPv4 Address" IsOverridable="true" IsLocal="true">
+             <AllowedValues />
+           </AttachedAttribute>
+           <AttachedAttribute Name="IPv6 Address" IsOverridable="true" IsLocal="true">
+             <AllowedValues />
+           </AttachedAttribute>
+           <AttachedAttribute Name="Port Speed" IsOverridable="true" IsLocal="true">
+             <AllowedValues />
+           </AttachedAttribute>
+
+         </AttachedAttributes>
+         <AttributeValues>
+           <AttributeValue Name="MAC Address" Value="" />
+           <AttributeValue Name="IPv4 Address" Value="" />
+           <AttributeValue Name="IPv6 Address" Value="" />
+           <AttributeValue Name="Port Speed" Value="" />
+
+         </AttributeValues>
+     <ParentModels>
+       <ParentModelName>{{ cookiecutter.model_name }}</ParentModelName>
+     </ParentModels>
+     <Drivers />
+     <Scripts />
+       </ResourceModel>
+     </Models>
+     <Categories />
+   </ResourceFamily>
+   <ResourceFamily Name="Power Port" IsConnectable="true" IsLockedByDefault="true" Description="" IsSearchable="true">
         <AttachedAttributes />
 		<AttributeValues />
 		<Models>
@@ -407,45 +269,7 @@
             <AttributeValue Name="Port Description" Value="" />
         </AttributeValues>
 	    <ParentModels>
-            <ParentModelName>Generic Chassis</ParentModelName>
-          </ParentModels>
-          <Drivers />
-          <Scripts />
-        </ResourceModel>
-      </Models>
-      <Categories />
-    </ResourceFamily>
-    <ResourceFamily Name="Port Channel" IsConnectable="true" IsLockedByDefault="true" Description="" IsSearchable="true">
-	    <AttachedAttributes />
-		<AttributeValues />
-      <Models>
-        <ResourceModel Name="Generic Port Channel" Description="" SupportsConcurrentCommands="false">
-		<AttachedAttributes>
-            <AttachedAttribute Name="Associated Ports" IsOverridable="true" IsLocal="true">
-				<AllowedValues />
-            </AttachedAttribute>
-            <AttachedAttribute Name="IPv4 Address" IsOverridable="true" IsLocal="true">
-				<AllowedValues />
-            </AttachedAttribute>
-            <AttachedAttribute Name="IPv6 Address" IsOverridable="true" IsLocal="true">
-				<AllowedValues />
-            </AttachedAttribute>
-            <AttachedAttribute Name="Port Description" IsOverridable="true" IsLocal="true">
-				<AllowedValues />
-            </AttachedAttribute>
-			<AttachedAttribute Name="Protocol Type" IsOverridable="true" IsLocal="true">
-				<AllowedValues />
-            </AttachedAttribute>
-        </AttachedAttributes>
-        <AttributeValues>
-            <AttributeValue Name="Associated Ports" Value="" />
-            <AttributeValue Name="IPv4 Address" Value="" />
-            <AttributeValue Name="IPv6 Address" Value="" />
-            <AttributeValue Name="Port Description" Value="" />
-			<AttributeValue Name="Protocol Type" Value="Transparent" />
-        </AttributeValues>
-          <ParentModels>
-            <ParentModelName>Cisco NXOS Switch</ParentModelName>
+            <ParentModelName>{{ cookiecutter.model_name }}</ParentModelName>
           </ParentModels>
           <Drivers />
           <Scripts />
@@ -454,6 +278,7 @@
       <Categories />
     </ResourceFamily>
   </ResourceFamilies>
-  <DriverDescriptors />
-  <ScriptDescriptors />
+  <DriverDescriptors>
+      <DriverDescriptor Name="{{ cookiecutter.driver_name }}" DriverType="PythonDriver" />
+  </DriverDescriptors>
 </DataModelInfo>

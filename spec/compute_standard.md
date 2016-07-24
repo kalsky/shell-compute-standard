@@ -139,7 +139,23 @@ Command outputs: On failure an exception containing the error will be thrown and
          - Configuration Type - mandatory, no default. Possible values - StartUp or Running
 
 
-
   - ** Restart ** – restarts the device
       - Inputs:
         - Note that not all devices support this command. In such cases the command just wouldn’t be implemented
+
+
+
+
+### Save & Restore in sandbox orchestration  
+The shell must implement the save and restore commands and is responsible on saving and restoring its own state. The standard specifies the interface and functionality that shells expose to the sandbox orchestration. These two commands are hidden from the end user, their interface uses .json protocol and they should only be used by the sandbox orchestration via API.
+
+
+```javascript
+orcestration_save (mode="shallow", custom_params = null)
+```
+
+```javascript
+orcestration_restore (saved_details)
+```
+
+**For more details about the save & restore implementation: See the save & restore standard. **

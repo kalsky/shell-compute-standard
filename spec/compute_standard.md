@@ -150,11 +150,11 @@ Command outputs: On failure an exception containing the error will be thrown and
 The shell must implement the save and restore commands and is responsible on saving and restoring its own state. The standard specifies the interface and functionality that shells expose to the sandbox orchestration. These two commands are hidden from the end user, their interface uses .json protocol and they should only be used by the sandbox orchestration via API.
 
 
-```javascript
+```python
 orcestration_save (mode="shallow", custom_params = null)
 ```
 
-```javascript
+```python
 orcestration_restore (saved_details)
 ```
 

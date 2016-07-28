@@ -109,53 +109,117 @@ Port Description | | No
 
 
 
-### commands
+### Commands
 Below is a list of all the commands that will be part of the standard Shell, their names and interfaces. Each  Shell that will be released by Quali’s engineering will include implementation for all those commands.
 
 When creating a new shell according to the standard it is OK not to implement all commands and/or implement additional command, but a command with a functionality that fits one of the predefined list commands should be implemented according to the standard.
 
-Command outputs: On failure an exception containing the error will be thrown and the command will be shown as failed. A failure is defined as any scenario in which the command didn’t complete its expected behavior, regardless if the issue originates from the command’s input, device or the command infrastructure itself. On success the command will just return as passed with no output. The “Autoload” command has a special output on success that CloudShell reads when building the resource hierarchy. The “Save” command will return an output on success with the file name (exact syntax below).
+Command outputs: On failure an exception containing the error will be thrown and the command will be shown as failed. A failure is defined as any scenario in which the command didn’t complete its expected behavior, regardless if the issue originates from the command’s input, device or the command infrastructure itself. On success the command will just return as passed with no output.
 
 
+#### Get Inventory (Shell Autoload)
+This function queries the device, discovers it's specification and autoloads it into CloudShell. When a new resource is created, CloudShell asks the user to specify some user inputs (i.e user name & password) and then it calls the get_inventory function.
 
-- ** Autoload ** – queries the devices and loads the structure and attribute values into CloudShell.
-  - SNMP Based
-
-
-
-  - ** Save ** – creates a configuration file.
-    - Inputs
-        - Configuration Type – optional, if empty the default value will be taken. Possible values – StartUp or Running Default value – Running
-        - Folder Path – the path in which the configuration file will be saved. Won’t include the name of the file but only the folder. This input is optional and in case this input is empty the value will be taken from the “Backup Location” attribute on the root resource. The path should include the protocol type (for example “tftp://asdf”)
-
-   - Output: "<FullFileName>,"
-   - The configuration file name should be “[ResourceName]-[ConfigurationType]-[DDMMYY]-[HHMMSS]”
-
-
-   - ** Restore ** – restores a configuration file.
-     - Inputs
-         - Path – the path to the configuration file, including the configuration file name. The path should include the protocol type (for example “tftp://asdf”). This input is mandatory.
-         - Restore Method – optional, if empty the default value will be taken. Possible values – Append or Override Default value – Override
-         - Configuration Type - mandatory, no default. Possible values - StartUp or Running
-
-
-  - ** Restart ** – restarts the device
-      - Inputs:
-        - Note that not all devices support this command. In such cases the command just wouldn’t be implemented
-
-
-
-
-### Save & Restore in sandbox orchestration  
-The shell must implement the save and restore commands and is responsible on saving and restoring its own state. The standard specifies the interface and functionality that shells expose to the sandbox orchestration. These two commands are hidden from the end user, their interface uses .json protocol and they should only be used by the sandbox orchestration via API.
-
+The standard recommended way of communicating and discovering the device should be via SNMP protocol.
 
 ```python
-orcestration_save (mode="shallow", custom_params = null)
-```
+get_inventory (context)
+```  
+###### Input
+Parameter | Data Type | Required | Description
+--- | --- | --- | ---
+context | object | system parameter | object of type AutoLoadCommandContext which includes API connectivity details and the details of the resource including attributes that the user entered during the resource creation.
+
+
+###### Output
+Parameter | Data Type | Required | Description
+--- | --- | --- | ---
+AutoLoadDetails | object | Yes | object of type AutoLoadDetails which the discovered resource structure and attributes.
 
 ```python
-orcestration_restore (saved_details)
-```
+class AutoLoadDetails:
+    def __init__(self, resources, attributes):
+        # list[AutoLoadResource] - the list of resources (root and sub) that were discovered
+        self.resources = resources  
 
-**For more details about the save & restore implementation: See the save & restore standard. **
+        # list[AutoLoadAttribute] - the list of attributes of the discovered resources
+        self.attributes = attributes  
+
+
+class AutoLoadResource:
+    def __init__(self, model, name, relative_address, unique_identifier=None):
+        self.model = model
+        self.name = name
+        self.relative_address = relative_address
+        self.unique_identifier = unique_identifier
+
+
+class AutoLoadAttribute:
+    def __init__(self, relative_address, attribute_name, attribute_value):
+        self.relative_address = relative_addres
+        self.attribute_name = attribute_name
+        self.attribute_value = attribute_value
+```  
+
+
+ #### Save a snapshot of the server
+ ```python
+ save (folder_path)  
+ ```  
+
+###### Input
+Parameter | Data Type | Required | Description
+--- | --- | --- | ---
+folder_path | string | no | the path in which the configuration file will be saved. Won’t include the name of the file but only the folder. This input is optional and in case this input is empty the value will be taken from the “Backup Location” attribute on the root resource. The path should include the protocol type (for example “tftp://asdf”)
+
+###### Output
+The configuration file name should be “[ResourceName]-[ConfigurationType]-[DDMMYY]-[HHMMSS]”
+
+
+
+ #### Restore a snapshot of the server
+ ```python
+ restore (path)
+ ```  
+
+##### Input
+Parameter | Data Type | Required | Description
+--- | --- | --- | ---
+path | string | yes | the path to the configuration file, including the configuration file name. The path should include the protocol type (for example “tftp://asdf”). This input is mandatory
+
+
+##### Output
+None.
+
+
+
+ #### Restart the device       
+ ```python
+ restart():     
+ ```  
+
+ Sends a restart request to the compute server
+
+##### Input
+None.
+
+
+##### Output
+None.
+
+
+
+
+  #### Save & Restore in sandbox orchestration  
+  The shell must implement the save and restore commands and is responsible on saving and restoring its own state. The standard specifies the interface and functionality that shells expose to the sandbox orchestration. These two commands are hidden from the end user, their interface uses .json protocol and they should only be used by the sandbox orchestration via API.
+
+
+  ```python
+  orchestration_save (mode="shallow", custom_params = null)
+  ```
+
+  ```python
+  orchestration_restore (saved_details)
+  ```
+
+  **For more details:** [Orchestration Standard - Save & Restore ](https://github.com/QualiSystems/sandbox_orchestration_standard/blob/master/save%20%26%20restore%20standard.md)

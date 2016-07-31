@@ -109,44 +109,38 @@ Port Description | | No
 
 
 
+
 ### Commands
-Below is a list of all the commands that should be part of the Shell, their names and interfaces.
+The following chapter describes the list of commands that needs to be supported by the shell. it includes command name, parameters and description of the functionality.
 
-When creating a new shell according to the standard it is OK not to implement all commands and/or implement additional command, but a command with a functionality that fits one of the predefined list commands should be implemented according to the standard.
+- **Interface Implementation** - When creating a new shell according to the standard it is OK not to implement all commands and/or implement additional command, but a command with a functionality that fits one of the predefined list commands should be implemented according to the standard.
 
-Command outputs: On failure an exception containing the error will be thrown and the command will be shown as failed. A failure is defined as any scenario in which the command didn’t complete its expected behavior, regardless if the issue originates from the command’s input, device or the command infrastructure itself. On success the command will just return as passed with no output.
+- **Error Handling**: Command outputs: On failure an exception containing the error will be thrown and the command will be shown as failed. A failure is defined as any scenario in which the command didn’t complete its expected behavior, regardless if the issue originates from the command’s input, device or the command infrastructure itself. On success the command will just return as passed with no output.
+
 
 
 
 #### Get Inventory (Shell Autoload)
 ```python
-get_inventory (context)
+def get_inventory (context)
 ```  
 This function queries the device, discovers it's specification and autoloads it into CloudShell. When a new resource is created, CloudShell asks the user to specify some user inputs (i.e user name & password) and then it calls the get_inventory function.
 
 The standard recommended way of communicating and discovering the device should be via SNMP protocol.
 
 
-###### Input
-Parameter | Data Type | Required | Description
---- | --- | --- | ---
-context | object | CloudShell adds | object of type AutoLoadCommandContext which includes API connectivity details and the details of the resource including attributes that the user entered during the resource creation.
-
-
-###### Output
-Parameter | Data Type | Required | Description
---- | --- | --- | ---
-AutoLoadDetails | object | Yes | object of type AutoLoadDetails which the discovered resource structure and attributes.
+###### Parameters
+Input / Output | Parameter | Data Type | Required | Description
+--- | --- | --- | --- | ---
+Input | context | object | system parameter | object of type AutoLoadCommandContext which includes API connectivity details and the details of the resource including attributes that the user entered during the resource creation.
+Output | AutoLoadDetails | object | Yes | object of type AutoLoadDetails which the discovered resource structure and attributes.
 
 ```python
+# Get inventory output details
 class AutoLoadDetails:
-    def __init__(self, resources, attributes):
-        # list[AutoLoadResource] - the list of resources (root and sub) that were discovered
-        self.resources = resources  
-
-        # list[AutoLoadAttribute] - the list of attributes of the discovered resources
-        self.attributes = attributes  
-
+    def __init__(self, resources, attributes):        
+        self.resources = resources    # list[AutoLoadResource]          
+        self.attributes = attributes  # list[AutoLoadAttribute]
 
 class AutoLoadResource:
     def __init__(self, model, name, relative_address, unique_identifier=None):
@@ -154,7 +148,6 @@ class AutoLoadResource:
         self.name = name
         self.relative_address = relative_address
         self.unique_identifier = unique_identifier
-
 
 class AutoLoadAttribute:
     def __init__(self, relative_address, attribute_name, attribute_value):
@@ -164,53 +157,39 @@ class AutoLoadAttribute:
 ```  
 
 
-
-
-#### Save a snapshot of the server
+#### Save a snapshot of the Compute server
 ```python
-save (folder_path)  
+def save (folder_path)  
 ```  
 
-###### Input
-Parameter | Data Type | Required | Description
---- | --- | --- | ---
-folder_path | string | no | the path in which the configuration file will be saved. Won’t include the name of the file but only the folder. This input is optional and in case this input is empty the value will be taken from the “Backup Location” attribute on the root resource. The path should include the protocol type (for example “tftp://asdf”)
-
-###### Output
-The configuration file name should be “[ResourceName]-[ConfigurationType]-[DDMMYY]-[HHMMSS]”
+###### Parameters
+Input / Output | Parameter | Data Type | Required | Description
+--- | --- | --- | --- | ---
+Input | folder_path | string | no | the path in which the configuration file will be saved. Won’t include the name of the file but only the folder. This input is optional and in case this input is empty the value will be taken from the “Backup Location” attribute on the root resource. The path should include the protocol type (for example “tftp://asdf”)
+Output | | string | yes | The configuration file name should be “[ResourceName]-[ConfigurationType]-[DDMMYY]-[HHMMSS]”
 
 
 
 
-#### Restore a snapshot of the server
+#### Restore a snapshot of the Compute server
 ```python
-restore (path)
+def restore (path)
 ```  
 
-###### Input
-Parameter | Data Type | Required | Description
---- | --- | --- | ---
-path | string | yes | the path to the configuration file, including the configuration file name. The path should include the protocol type (for example “tftp://asdf”). This input is mandatory
-
-
-###### Output
-None.
-
+###### Parameters
+Input / Output | Parameter | Data Type | Required | Description
+--- | --- | --- | --- | ---
+Input | path | string | no | the path to the configuration file, including the configuration file name. The path should include the protocol type (for example “tftp://asdf”). This input is mandatory
 
 
 
 #### Restart the device       
 ```python
-restart():     
+def restart():     
 ```  
-
 Sends a restart request to the compute server
 
-###### Input
-None.
-
-
-###### Output
+###### Parameters
 None.
 
 
@@ -221,11 +200,11 @@ The shell must implement the save and restore commands and is responsible on sav
 
 
 ```python
-orchestration_save (mode="shallow", custom_params = null)
+def orchestration_save (mode="shallow", custom_params = null)
 ```
 
 ```python
-orchestration_restore (saved_details)
+def orchestration_restore (saved_details)
 ```
 
 **For more details:** [Orchestration Standard - Save & Restore ](http://goo.gl/L8pUjP)

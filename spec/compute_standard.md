@@ -25,13 +25,13 @@ The compute Shell version follows Semantic Versioning Guidelines (see details in
 ## Data Model
 ### Families & Models
 
-** Compute Server Data Model **
+**Compute Server Data Model**
 - Compute Server
  - Port
  - Power Port
 
 
-** Example **
+**Example**
 - Family: Compute Server, Model: Dell Power-Edge Server
 - Family: Port, Model: Resource Port
 - Family: Power Port, Model: Generic Power Port
@@ -162,10 +162,10 @@ class AutoLoadAttribute:
 ```  
 
 
- #### Save a snapshot of the server
- ```python
- save (folder_path)  
- ```  
+#### Save a snapshot of the server
+```python
+save (folder_path)  
+```  
 
 ###### Input
 Parameter | Data Type | Required | Description
@@ -177,10 +177,10 @@ The configuration file name should be “[ResourceName]-[ConfigurationType]-[DDM
 
 
 
- #### Restore a snapshot of the server
- ```python
- restore (path)
- ```  
+#### Restore a snapshot of the server
+```python
+restore (path)
+```  
 
 ##### Input
 Parameter | Data Type | Required | Description
@@ -193,12 +193,12 @@ None.
 
 
 
- #### Restart the device       
- ```python
- restart():     
- ```  
+#### Restart the device       
+```python
+restart():     
+```  
 
- Sends a restart request to the compute server
+Sends a restart request to the compute server
 
 ##### Input
 None.
@@ -210,16 +210,16 @@ None.
 
 
 
-  #### Save & Restore in sandbox orchestration  
-  The shell must implement the save and restore commands and is responsible on saving and restoring its own state. The standard specifies the interface and functionality that shells expose to the sandbox orchestration. These two commands are hidden from the end user, their interface uses .json protocol and they should only be used by the sandbox orchestration via API.
+#### Save & Restore in sandbox orchestration  
+The shell must implement the save and restore commands and is responsible on saving and restoring its own state. The standard specifies the interface and functionality that shells expose to the sandbox orchestration. These two commands are hidden from the end user, their interface uses .json protocol and they should only be used by the sandbox orchestration via API.
 
 
-  ```python
-  orchestration_save (mode="shallow", custom_params = null)
-  ```
+```python
+orchestration_save (mode="shallow", custom_params = null)
+```
 
-  ```python
-  orchestration_restore (saved_details)
-  ```
+```python
+orchestration_restore (saved_details)
+```
 
-  **For more details:** [Orchestration Standard - Save & Restore ](https://github.com/QualiSystems/sandbox_orchestration_standard/blob/master/save%20%26%20restore%20standard.md)
+**For more details:** [Orchestration Standard - Save & Restore ](http://goo.gl/L8pUjP)

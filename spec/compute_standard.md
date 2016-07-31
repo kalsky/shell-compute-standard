@@ -110,25 +110,27 @@ Port Description | | No
 
 
 ### Commands
-Below is a list of all the commands that will be part of the standard Shell, their names and interfaces. Each  Shell that will be released by Quali’s engineering will include implementation for all those commands.
+Below is a list of all the commands that should be part of the Shell, their names and interfaces.
 
 When creating a new shell according to the standard it is OK not to implement all commands and/or implement additional command, but a command with a functionality that fits one of the predefined list commands should be implemented according to the standard.
 
 Command outputs: On failure an exception containing the error will be thrown and the command will be shown as failed. A failure is defined as any scenario in which the command didn’t complete its expected behavior, regardless if the issue originates from the command’s input, device or the command infrastructure itself. On success the command will just return as passed with no output.
 
 
+
 #### Get Inventory (Shell Autoload)
+```python
+get_inventory (context)
+```  
 This function queries the device, discovers it's specification and autoloads it into CloudShell. When a new resource is created, CloudShell asks the user to specify some user inputs (i.e user name & password) and then it calls the get_inventory function.
 
 The standard recommended way of communicating and discovering the device should be via SNMP protocol.
 
-```python
-get_inventory (context)
-```  
+
 ###### Input
 Parameter | Data Type | Required | Description
 --- | --- | --- | ---
-context | object | system parameter | object of type AutoLoadCommandContext which includes API connectivity details and the details of the resource including attributes that the user entered during the resource creation.
+context | object | CloudShell adds | object of type AutoLoadCommandContext which includes API connectivity details and the details of the resource including attributes that the user entered during the resource creation.
 
 
 ###### Output
@@ -162,6 +164,8 @@ class AutoLoadAttribute:
 ```  
 
 
+
+
 #### Save a snapshot of the server
 ```python
 save (folder_path)  
@@ -177,19 +181,21 @@ The configuration file name should be “[ResourceName]-[ConfigurationType]-[DDM
 
 
 
+
 #### Restore a snapshot of the server
 ```python
 restore (path)
 ```  
 
-##### Input
+###### Input
 Parameter | Data Type | Required | Description
 --- | --- | --- | ---
 path | string | yes | the path to the configuration file, including the configuration file name. The path should include the protocol type (for example “tftp://asdf”). This input is mandatory
 
 
-##### Output
+###### Output
 None.
+
 
 
 
@@ -200,11 +206,11 @@ restart():
 
 Sends a restart request to the compute server
 
-##### Input
+###### Input
 None.
 
 
-##### Output
+###### Output
 None.
 
 

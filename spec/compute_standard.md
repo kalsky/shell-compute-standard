@@ -22,7 +22,7 @@ Version | Date | Notes
 The compute Shell version follows Semantic Versioning Guidelines (see details in http://semver.org). In short, the version structure is Major.Minor.Patch, for example “1.0.2”. A Path version is promoted when making backward-compatibility bug fixes, a Minor version is promoted when adding functionality in a backwards-compatible manner and a  Major version is promoted when making a backwards incompatible changes.
 
 
-## Data Model
+## Data Model Structure
 ### Families & Models
 
 **Compute Server Data Model**
@@ -56,7 +56,7 @@ Power Port | Generic Power Port | PP[ContainerID][ID] | PP[ContainerID][ID]
 Note: The [ID] for each sub-resource is taken from the device itself (corresponds to the names defined in the device).
 
 
-### Attributes
+## Attributes
 #### Guidelines
 - Attributes which aren’t relevant to a devices won’t be populated by the driver.
 - All attributes which aren't user-input are "read only"

@@ -110,7 +110,7 @@ Port Description | | No
 
 
 
-### Commands
+## Commands
 The following chapter describes the list of commands that needs to be supported by the shell. it includes command name, parameters and description of the functionality.
 
 - **Interface Implementation** - When creating a new shell according to the standard it is OK not to implement all commands and/or implement additional command, but a command with a functionality that fits one of the predefined list commands should be implemented according to the standard.
@@ -120,7 +120,7 @@ The following chapter describes the list of commands that needs to be supported 
 
 
 
-#### Get Inventory (Shell Autoload)
+### Get Inventory (Shell Autoload)
 ```python
 def get_inventory (context)
 ```  
@@ -157,7 +157,7 @@ class AutoLoadAttribute:
 ```  
 
 
-#### Save a snapshot of the Compute server
+### Save a snapshot of the Compute server
 ```python
 def save (folder_path)  
 ```  
@@ -171,7 +171,7 @@ Output | | string | yes | The configuration file name should be “[ResourceName
 
 
 
-#### Restore a snapshot of the Compute server
+### Restore a snapshot of the Compute server
 ```python
 def restore (path)
 ```  
@@ -183,7 +183,7 @@ Input | path | string | no | the path to the configuration file, including the c
 
 
 
-#### Restart the device       
+### Restart the device       
 ```python
 def restart():     
 ```  
@@ -195,7 +195,7 @@ None.
 
 
 
-#### Save & Restore in sandbox orchestration  
+### Save & Restore in sandbox orchestration  
 The shell must implement the save and restore commands and is responsible on saving and restoring its own state. The standard specifies the interface and functionality that shells expose to the sandbox orchestration. These two commands are hidden from the end user, their interface uses .json protocol and they should only be used by the sandbox orchestration via API.
 
 

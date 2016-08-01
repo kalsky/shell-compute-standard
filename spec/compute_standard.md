@@ -123,9 +123,15 @@ The following chapter describes the list of commands that needs to be supported 
 ```python
 def get_inventory(self, context)
 ```  
+###### Description
 This function queries the device, discovers it's specification and autoloads it into CloudShell. When a new resource is created, CloudShell asks the user to specify some user inputs (i.e user name & password) and then it calls the get_inventory function.
 
 The standard recommended way of communicating and discovering the device should be via SNMP protocol.
+
+
+###### Display Name
+System command, it has no display name.
+
 
 
 ###### Parameters
@@ -136,10 +142,15 @@ Output | AutoLoadDetails | object | Yes | object of type AutoLoadDetails which t
 
 
 
-### Save a snapshot of the Compute server
+### Save
 ```python
 def save (folder_path)  
 ```  
+###### Description
+Save a snapshot of the Compute server
+
+###### Display Name
+Save  
 
 ###### Parameters
 Input / Output | Parameter | Data Type | Required | Description
@@ -150,10 +161,16 @@ Output | | string | yes | The configuration file name should be “[ResourceName
 
 
 
-### Restore a snapshot of the Compute server
+### Restore
 ```python
 def restore (path)
 ```  
+###### Description
+Restore a snapshot of the Compute server
+
+###### Display Name
+Restore  
+
 
 ###### Parameters
 Input / Output | Parameter | Data Type | Required | Description
@@ -162,11 +179,15 @@ Input | path | string | no | the path to the configuration file, including the c
 
 
 
-### Restart the server
+### Restart
 ```python
 def restart()
 ```  
+###### Description
 Sends a restart request to the compute server
+
+###### Display Name
+Restart  
 
 ###### Parameters
 None.

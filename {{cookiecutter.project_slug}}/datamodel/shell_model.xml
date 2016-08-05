@@ -4,7 +4,7 @@
     </ShellAttributes>
 
     <ShellModel Family="Compute Server">
-        <ResourceModel Name="{{ cookiecutter.model_name }}" Description="" SupportsConcurrentCommands="true">
+        <ResourceModel Name="{{ cookiecutter.model_name }}" Description="" SupportsConcurrentCommands="false">
             <AttachedAttributes>
                 <AttachedAttribute Name="OS Architecture" IsOverridable="true" IsLocal="true">
                   <AllowedValues />
